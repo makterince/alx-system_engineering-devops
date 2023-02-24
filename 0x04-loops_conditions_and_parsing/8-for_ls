@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #scripts displays content in current directory
+mylist=$(ls)
 for i in $mylist; do
 	echo "$i" | cut -d '-' -f2
 done
