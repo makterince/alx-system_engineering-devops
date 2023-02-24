@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 #scripts displays content in current directory
-for file in *
-do
-    if [ "${file:0:1}" != "." ] && [ -f "$file" ]; then
-        filename=$(echo $file | cut -d'-' -f2-)
-        echo "$filename"
-    fi
+for i in $mylist; do
+	echo "$i" | cut -d '-' -f2
 done
