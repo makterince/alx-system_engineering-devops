@@ -10,7 +10,6 @@ do
         printf "%02d:%02d\n" $hour $minute
         minute=$((minute+1))
     done
-    
     minute=0
     hour=$((hour+1))
 done | head -n 70
