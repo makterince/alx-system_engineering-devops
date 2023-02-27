@@ -1,21 +1,9 @@
 #!/usr/bin/env bash
-# Open the file /etc/passwd for reading
-exec 3</etc/passwd
+# This script displays the contents of the file `/etc/passwd`.
+#   Only displays the username, user id, and user home directory path.
 
-# While loop to read the file line by line
-while read -u 3 line; do
-
-    # Extract the username, user id, and home directory from the line
-    username=$(echo "$line" | cut -d: -f1)
-    uid=$(echo "$line" | cut -d: -f3)
-    home_dir=$(echo "$line" | cut -d: -f6)
-
-    # Print the username, user id, and home directory
-    echo "Username: $username"
-    echo "User ID: $uid"
-    echo "Home Directory: $home_dir"
-
-done
-
-# Close the file
-exec 3<&-
+myfile="/etc/passwd"
+while IFS= read -r line
+do
+	echo "$line" | cut -d":" -f1,3,6
+done < "$myfile"
