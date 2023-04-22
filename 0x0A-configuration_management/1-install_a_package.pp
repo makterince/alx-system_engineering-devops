@@ -1,7 +1,5 @@
-# installing file from pip3
-exec { 'killmenow':
-  command => 'pkill killmenow',
-  onlyif  => 'pgrep killmenow',
-  path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-  user    => 'root',
+#installing flask from pip3
+package { 'flask':
+  ensure   => '2.1.0',
+  provider => 'pip3',
 }
