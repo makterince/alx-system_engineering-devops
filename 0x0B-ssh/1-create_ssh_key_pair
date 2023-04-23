@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Generate RSA key pair with 4096 bits
+
+
+openssl genrsa -aes256 -passout pass:betty -out school.key 4096
+openssl rsa -in school.key -passin pass:betty -pubout -out school.pub
+echo "RSA key pair with 4096 bits has been generated."
+echo "Private key: school.key"
+echo "Public key: school.pub"
