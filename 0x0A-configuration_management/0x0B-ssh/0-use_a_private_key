@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # Set the server's hostname or IP address
-server="your_server_hostname_or_ip_address"
-private_key="~/.ssh/school"
-user="ubuntu"
-ssh -i "$private_key" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -o "LogLevel=ERROR" -o "BatchMode=yes" "$user@$server"
 
+
+ssh -i ~/.ssh/school ubuntu@54.152.237.43
