@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
-
 # Set the server's hostname or IP address
 server="your_server_hostname_or_ip_address"
-
-# Set the private key file path
 private_key="~/.ssh/school"
-
-# Set the remote user
 user="ubuntu"
-
-# Use ssh with single-character flags to connect to the server
 ssh -i "$private_key" -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -o "LogLevel=ERROR" -o "BatchMode=yes" "$user@$server"
 
