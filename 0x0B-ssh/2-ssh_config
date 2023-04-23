@@ -1,0 +1,8 @@
+# File: ~/.ssh/config
+
+Host my_server
+    HostName <163546-web-01>
+    User <ubuntu>
+    IdentityFile ~/.ssh/school
+    PreferredAuthentications publickey
+    PasswordAuthentication no
