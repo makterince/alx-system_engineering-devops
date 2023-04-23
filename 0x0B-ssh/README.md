@@ -1,1 +1,1 @@
-ssh
+ssh ubuntu server
