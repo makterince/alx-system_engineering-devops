@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#configure domain and subdomain
+
+
+domain=$1
+subdomain=$2
+
+# Default subdomains to audit if subdomain parameter is not provided
+subdomains=("www" "lb-01" "web-01" "web-02")
+
+if [ -n "$subdomain" ]; then
+    subdomains=("$subdomain")
+fi
+
+for subdomain in "${subdomains[@]}"
+do
+    # Get the DNS record for the subdomain
+    record=$(dig +short $subdomain.$domain)
+
+    # Get the record type
+    record_type=$(echo $record | awk '{print $1}')
+
+    # Get the destination
+    destination=$(echo $record | awk '{print $2}')
+
+    # Output the information
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+done
