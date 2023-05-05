@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
 #first was to check if the service was running on port 80
-sudo ss -lnp | grep :80
-
-#second was to check for other services running on the same port
-#third was to stop the service running on port 80
-sudo systemctl stop <service-name>
-
-#fourth was to restart nginx
-sudo systemctl restart nginx.service
+cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
