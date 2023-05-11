@@ -1,0 +1,36 @@
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+    tune.ssl.default-dh-param 2048
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+
+frontend http-in
+    bind *:80
+    mode http
+    redirect scheme https code 301 if !{ ssl_fc }
+
+frontend www-https
+    bind *:443 ssl crt /etc/ssl/www.makterince.tech.pem
+    http-request add-header X-Served-By https
+    acl is_www hdr(host) -i www.makterince.tech
+    use_backend www-backend if is_www
+
+backend www-backend
+    mode http
+    balance roundrobin
+    server web-01 54.165.197.124:80 check
+    server web-02 54.234.35.46:80 check

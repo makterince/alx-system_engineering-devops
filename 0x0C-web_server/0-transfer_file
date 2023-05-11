@@ -1,2 +1,26 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 #transfers file from client to server
+=======
+#check if the number of parameters is less than 3, display usage and exit
+if [ "$#" -lt 3 ]; then
+  echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+  exit 1
+fi
+
+# Read the parameters
+FILE_PATH="$1"
+SERVER_IP="$2"
+USERNAME="$3"
+SSH_KEY_PATH="$4"
+
+# Use scp to transfer the file to the server
+scp -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$FILE_PATH" "$USERNAME@$SERVER_IP:~/"
+
+# Check if scp command succeeded
+if [ "$?" -eq 0 ]; then
+  echo "File transfer successful."
+else
+  echo "File transfer failed."
+fi
+>>>>>>> 87a12a351ef24efdd3bf7919e74574c17fc7cf5c
