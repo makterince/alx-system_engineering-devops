@@ -1,3 +1,4 @@
-sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
-sudo sh -c "iptables-save > /etc/iptables.rules"
-sudo service iptables-persistent restart
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+-A POSTROUTING ACCEPT [0:0]
