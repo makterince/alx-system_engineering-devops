@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#first was to check if the service was running on port 80
+cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart

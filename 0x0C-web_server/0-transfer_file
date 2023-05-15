@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
+#transfers file from client to server
+=======
 #check if the number of parameters is less than 3, display usage and exit
 if [ "$#" -lt 3 ]; then
   echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
@@ -20,3 +23,4 @@ if [ "$?" -eq 0 ]; then
 else
   echo "File transfer failed."
 fi
+>>>>>>> 87a12a351ef24efdd3bf7919e74574c17fc7cf5c
