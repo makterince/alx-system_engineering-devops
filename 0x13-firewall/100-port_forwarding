@@ -1,4 +1,14 @@
+# START OPENVPN RULES
+# NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+# Allow traffic from OpenVPN client to eth0 (change eth0 to the interface you want to forward traffic to)
+-A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+COMMIT
+# END OPENVPN RULES
+
+# Redirect requests from port 8080 to port 80
 *nat
 :PREROUTING ACCEPT [0:0]
 -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
--A POSTROUTING ACCEPT [0:0]
+COMMIT
