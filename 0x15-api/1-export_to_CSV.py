@@ -6,24 +6,26 @@ It uses a REST API to fetch the data and displays it on the standard output.
 if __name__ == "__main__":
     import requests
     import sys
+    import csv
 
     employee_id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/users"
-
+    
     res = requests.get("{}/{}".format(url, employee_id))
     employee_name = res.json().get("name")
-
+    
     res = requests.get("{}/{}/todos".format(url, employee_id))
     tasks = res.json()
 
-    completed_tasks = [
-            task.get("title")
-            for task in tasks
-            if task.get("completed")
-    ]
-    
-    print("Employee {} is done with tasks({}/{}):"
-            .format(employee_name, len(completed_tasks), len(tasks)))
-    
-    for task_name in completed_tasks:
-        print("\t {}".format(task_name))
+    file_name = "{}.csv".format(employee_id)
+    with open(file_name, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, delimiter=',',
+                            quotechar='"', quoting=csv.QUOTE_ALL)
+
+        for task in tasks:
+            row = [
+                    employee_id, employee_name,
+                    task["completed"], task["title"]
+                    ]
+            
+            writer.writerow(row)
