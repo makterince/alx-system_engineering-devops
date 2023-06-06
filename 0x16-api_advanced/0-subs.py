@@ -1,19 +1,20 @@
 #!/usr/bin/python3
 """ rerturns number of subscribers """
-
+import requests
 def number_of_subscribers(subreddit):
     """ checks and returns total number of subscribers """
 
 
     headers = { 'User-Agent': 'testing' }
-    response = requests.get{f'https://www.reddit.com/r/{subreddit}/about.json', headers=headers}
-
-    if response.status_code == 200:
-        try:
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    try:
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        if response.status_code == 200:
             data = response.json()
-            subscribers = data[ 'data']['subscribers']
-            return subscribers
-        except KeyError:
+            return data["data"]["subscribers"]
+        elif response.status_code == 404:
             return 0
-    else:
+        else:
+            return 0
+    except requests.exceptions.RequestException as e:
         return 0
