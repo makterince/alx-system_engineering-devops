@@ -22,5 +22,5 @@ def top_ten(subreddit):
             print("None")
         else:
             print("None")
-    except requests.exceptions.RequestException as e:
+    except Exception:
         print("None")
