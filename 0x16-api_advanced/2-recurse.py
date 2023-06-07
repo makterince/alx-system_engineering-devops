@@ -4,7 +4,7 @@ import requests
     returns list of titles """
 
     
-def recurse(subreddit):
+def recurse(subreddit, hot_list=[], after="", count=0):
     """
     Recursively queries the Reddit API and returns a list containing the title
     Args:
