@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-import requests
 """ gets the first 10 hot posts listed for a subreddit """
+
+import requests
+import sys
+
 
 def top_ten(subreddit):
     """ gets the 10 hot posts """
 
     headers = {"User-Agent": "My Reddit API Client"}
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    url = "https://www.reddit.com/r/{subreddit}/hot.json".format(subredit)
 
     try:
         response = requests.get(url, headers=headers, allow_redirects=False)
@@ -20,4 +23,4 @@ def top_ten(subreddit):
         else:
             print("None")
     except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
+        print("None")
