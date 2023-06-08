@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+"""
+    recursive function that querries the  reddit api
+    returns list of titles
+"""
+
 import requests
-""" recursive function that querries the  reddit api
-    returns list of titles """
 
     
 def recurse(subreddit, hot_list=[], after="", count=0):
@@ -16,7 +19,7 @@ def recurse(subreddit, hot_list=[], after="", count=0):
     """
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
-            "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+            "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by makterince)"
             }
     params = {
             "after": after,
