@@ -2,5 +2,5 @@
 #making second server identical to the first
 sudo apt update
 sudo apt install nginx
-echo "X-Served-By $(hostname);" | sudo tee /etc/nginx/conf.d/custom_http_response_header.conf > /dev/null
+echo "add_header X-Served-By $(hostname);" | sudo tee /etc/nginx/conf.d/custom_http_response_header.conf > /dev/null
 sudo systemctl restart nginx
