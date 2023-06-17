@@ -16,13 +16,21 @@
 # Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
 ##
 
+# events block
+events {
+    # Event processing model
+    # Sets the maximum number of simultaneous connections that can be opened by a worker process
+    worker_connections 1024;
+}
+
 # Default server configuration
 #
-server {
+http {
+    server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-	# SSL configuration
+        # SSL configuration
         #
         # listen 443 ssl default_server;
         # listen [::]:443 ssl default_server;
@@ -48,26 +56,26 @@ server {
 
         error_page 404 /custom_404.html;
         location = /custom_404.html {
-                root /usr/share/nginx/html;
-                internal;
+            root /usr/share/nginx/html;
+            internal;
         }
 
         location /hbnb_static {
-                alias /data/web_static/current/;
+            alias /data/web_static/current/;
         }
 
-	        location /airbnb-onepage/ {
-                include proxy_params;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_pass http://localhost:5000;
+        location /airbnb-onepage/ {
+            include proxy_params;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_pass http://localhost:5000;
         }
 
         location / {
-                add_header X-Served-By '163546-web-01';
-                # First attempt to serve request as file, then
-                # as directory, then fall back to displaying a 404.
-                try_files $uri $uri/ =404;
+            add_header X-Served-By '163546-web-01';
+            # First attempt to serve request as file, then
+            # as directory, then fall back to displaying a 404.
+            try_files $uri $uri/ =404;
         }
 
         # pass PHP scripts to FastCGI server
@@ -87,4 +95,6 @@ server {
         #location ~ /\.ht {
         #       deny all;
         #}
+    }
 }
+
